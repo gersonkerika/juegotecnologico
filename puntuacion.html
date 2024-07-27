@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Puntuación</title>
+    <style>
+        body {
+            background-color: #96f7f7; /* Color de fondo */
+            font-family: Arial, sans-serif; /* Fuente para el texto */
+            text-align: center; /* Alineación del texto */
+            color: #22048f; /* Color del texto */
+            background-image: url('fondo1.jpg');
+            background-size: cover; /* Imagen de fondo cubre todo el tamaño del cuerpo */
+            background-repeat: no-repeat; /* No repetir la imagen de fondo */
+            margin: 0; /* Eliminar margen predeterminado */
+            padding: 0; /* Eliminar padding predeterminado */
+        }
+        h1, h2, p {
+            margin: 0; /* Eliminar margen predeterminado en los encabezados y párrafos */
+            padding: 10px; /* Añadir padding para espacio alrededor del texto */
+        }
+        h1 {
+            font-size: 2em; /* Tamaño de fuente del encabezado principal */
+        }
+        h2 {
+            font-size: 1.5em; /* Tamaño de fuente del segundo encabezado */
+        }
+        p {
+            font-size: 1.2em; /* Tamaño de fuente del párrafo */
+        }
+        @media (max-width: 800px) {
+            /* Estilos para dispositivos móviles y tablets */
+            h1 {
+                font-size: 1.5em; /* Ajustar el tamaño del encabezado en pantallas más pequeñas */
+            }
+            h2 {
+                font-size: 1.2em; /* Ajustar el tamaño del segundo encabezado */
+            }
+            p {
+                font-size: 1em; /* Ajustar el tamaño del párrafo */
+            }
+        }
+        @media (max-width: 480px) {
+            /* Estilos para pantallas muy pequeñas como teléfonos móviles */
+            h1 {
+                font-size: 1.2em; /* Reducir aún más el tamaño del encabezado */
+            }
+            h2 {
+                font-size: 1em; /* Reducir el tamaño del segundo encabezado */
+            }
+            p {
+                font-size: 0.9em; /* Reducir el tamaño del párrafo */
+            }
+        }
+    </style>
+</head>
+<body>
+    <h1>Tu puntuación fue:</h1>
+    <p>Mejora tu puntuación</p>
+    <h2 id="puntuacion"></h2>
+    <script>
+        // Obtener parámetros de la URL y mostrar la puntuación
+        const urlParams = new URLSearchParams(window.location.search);
+        const puntuacion = urlParams.get('p');
+        document.getElementById('puntuacion').textContent = puntuacion;
+    </script>
+</body>
+</html>

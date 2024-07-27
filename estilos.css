@@ -1,0 +1,9 @@
+/* Estilos para cambiar el color del texto */
+body {
+    font-family: Arial, sans-serif;
+    text-align: center;
+    color: #da2222; /* Cambiar el color del texto a gris oscuro */
+}
+h1 {
+    color: rgb(176, 4, 98); /* Cambiar el color del texto de los encabezados h1 a azul */
+}

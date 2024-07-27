@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Aprende Con Las Siguientes Adivinanzas </title>
+    <style>
+        /* Estilos opcionales para mejorar la apariencia */
+        body {
+            font-family: Arial, sans-serif;
+            text-align: center;
+    background-image: url('fondo.jpg');
+    background-size: cover; /* Para cubrir todo el tamaño del cuerpo */
+}
+        img {
+            max-width: 80%;
+            height: auto;
+            margin-bottom: 20px; /* Espacio entre la imagen y el formulario */
+        }
+        #formulario {
+            margin-top: 20px; /* Espacio entre la imagen y el formulario */
+        }
+        #adivinanzaForm {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+        input[type="text"] {
+            width: 200px;
+            margin-bottom: 5px; /* Espacio entre el campo de texto y los botones */
+        }
+        button {
+            margin-bottom: 10px; /* Espacio entre los botones */
+        }
+    </style>
+</head>
+<body>
+    <h1>Aprende Con Las Siguientes Adivinanzas</h1>
+    <img id="componenteImg" src="cpu.png" alt="Componente a adivinar">
+    <form id="adivinanzaForm">
+        <label for="respuesta">Escribe tu respuesta:</label>
+        <input type="text" id="respuesta" name="respuesta">
+        <button type="button" onclick="verificarRespuesta()">Generar</button>
+    </form>
+    <p id="mensaje"></p>
+    <p>Puntuación: <span id="puntuacion">0</span></p>
+    <button onclick="siguienteImagen()">Siguiente imagen</button>
+    <button onclick="iniciarDeNuevo()">Iniciar de nuevo</button>
+
+    <script>
+        // Definición de variables para la puntuación y las imágenes con sus respuestas
+        let puntuacion = 0;
+        const imagenesRespuestas = [
+            {imagen: "cpu.png", respuesta: "cpu"},
+            {imagen: "placabase.png", respuesta: "placa base"},
+            {imagen: "ram.png", respuesta: "memoria ram"},
+            {imagen: "discoduro.png", respuesta: "disco duro"},
+            {imagen: "tarjetavideo.png", respuesta: "tarjeta video"},
+            {imagen: "fuente.png", respuesta: "fuente de alimentacion"},
+            {imagen: "ventilador.png", respuesta: "culer"},
+            {imagen: "unidadcd.png", respuesta: "lectora"},
+            {imagen: "red.png", respuesta: "tarjeta de red"},
+            {imagen: "usb.png", respuesta: "puertos usb"},
+            {imagen: "sonido.png", respuesta: "tarjeta de sonido"},
+            {imagen: "idm.png", respuesta: "idm"}
+            // Agrega más imágenes y respuestas aquí según necesites
+        ];
+        let indiceImagenActual = 0;
+
+        // Función para verificar la respuesta dada por el usuario
+        function verificarRespuesta() {
+            const respuestaUsuario = document.getElementById('respuesta').value.toLowerCase();
+            const respuestaCorrecta = imagenesRespuestas[indiceImagenActual].respuesta;
+            if (respuestaUsuario === respuestaCorrecta) {
+                puntuacion += 3; // Sumar 3 puntos por respuesta correcta
+                document.getElementById('puntuacion').textContent = puntuacion;
+                document.getElementById('mensaje').textContent = "¡Correcto!";
+            } else {
+                puntuacion = 0; // Reiniciar la puntuación si la respuesta es incorrecta
+                document.getElementById('puntuacion').textContent = puntuacion;
+                document.getElementById('mensaje').textContent = "Respuesta incorrecta. Inténtalo de nuevo.";
+            }
+            if (todasRespuestasCorrectas()) {
+                window.location.href = "felicidades.html";
+            } else if (indiceImagenActual === imagenesRespuestas.length - 1) {
+                window.location.href = "puntuacion.html?p=" + puntuacion;
+            }
+        }
+        // Función para verificar si todas las respuestas son correctas
+        function todasRespuestasCorrectas() {
+            return imagenesRespuestas.every(imagenRespuesta => imagenRespuesta.respuesta === "");
+        }
+
+        // Función para cargar la siguiente imagen y limpiar el formulario y el mensaje
+        function siguienteImagen() {
+            document.getElementById('respuesta').value = "";
+            document.getElementById('mensaje').textContent = "";
+            indiceImagenActual = (indiceImagenActual + 1) % imagenesRespuestas.length;
+            const nuevaImagen = imagenesRespuestas[indiceImagenActual].imagen;
+            document.getElementById('componenteImg').src = nuevaImagen;
+        }
+
+        // Función para iniciar el juego de nuevo
+        function iniciarDeNuevo() {
+            puntuacion = 0; // Reiniciar la puntuación
+            indiceImagenActual = 0; // Volver a la primera imagen
+            document.getElementById('puntuacion').textContent = puntuacion;
+            document.getElementById('componenteImg').src = imagenesRespuestas[indiceImagenActual].imagen;
+            document.getElementById('respuesta').value = "";
+            document.getElementById('mensaje').textContent = "";
+        }
+    </script>
+</body>
+</html>
